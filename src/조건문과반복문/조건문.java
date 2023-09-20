@@ -2,7 +2,7 @@ package 조건문과반복문;
 
 import java.util.Scanner;
 
-public class If문 {
+public class 조건문 {
   public static void main(String[] args) {
     /*
     주사위 3개

@@ -1,13 +1,13 @@
-package 입출력;
+package IO;
 
 import java.util.Scanner;
-
-public class Year {
+public class AminusB {
   public static void main(String[] args) {
-//    System.out.println(2541-1998); // 543
+
     Scanner sc = new Scanner(System.in);
+    int x = sc.nextInt();
     int y = sc.nextInt();
 
-    System.out.println(y-543);
+    System.out.println(x-y);
   }
 }

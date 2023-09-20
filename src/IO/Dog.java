@@ -1,4 +1,4 @@
-package 입출력;
+package IO;
 
 public class Dog {
   public static void main(String[] args) {

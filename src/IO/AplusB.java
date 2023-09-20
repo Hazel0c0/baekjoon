@@ -1,8 +1,8 @@
-package 입출력;
+package IO;
 
 import java.util.Scanner;
 
-public class Calculator {
+public class AplusB {
   public static void main(String[] args) {
 
     Scanner sc = new Scanner(System.in);
@@ -10,9 +10,5 @@ public class Calculator {
     int y = sc.nextInt();
 
     System.out.println(x+y);
-    System.out.println(x-y);
-    System.out.println(x*y);
-    System.out.println(x/y);
-    System.out.println(x%y);
   }
 }
