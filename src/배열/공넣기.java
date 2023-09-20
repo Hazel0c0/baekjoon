@@ -25,11 +25,12 @@ public class 공넣기 {
       j = sc.nextInt();
       k = sc.nextInt();
 
-      for (int l = i; l <= j; l++) {
-        basket[i-1]=k;
-        i++;
+      for (int l = i - 1; l < j; l++) {
+        basket[l] = k;
       }
     }
-      System.out.println(Arrays.toString(basket));
+    for (int k = 0; k < basket.length; k++) {
+      System.out.print(basket[k] + " ");
+    }
   }
 }
