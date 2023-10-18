@@ -1,4 +1,4 @@
-package 문자열;
+package 조건문과반복문;
 
 public class 더_크게_합치기 {
   // if문 대신 연산식 사용
