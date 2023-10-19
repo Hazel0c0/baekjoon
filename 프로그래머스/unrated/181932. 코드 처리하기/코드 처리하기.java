@@ -1,23 +1,19 @@
 class Solution {
     public String solution(String code) {
-    String ret = "";
-    char[] charArray = code.toCharArray();
-    int mode = 0;
-
-    for (int i = 0; i < charArray.length; i++) {
-      if (mode == 0) {
-        if (charArray[i] == '1') mode = 1;
-        else {
-          if (i % 2 == 0) ret += charArray[i];
-        }
-      } else if (mode == 1) {
-        if (charArray[i] == '1') mode = 0;
-        else {
-          if (i % 2 != 0) ret += charArray[i];
-        }
+        StringBuilder ret = new StringBuilder();
+        int mode = 0;
+        
+        for (int i = 0; i < code.length(); i++) {
+          char c = code.charAt(i);
+          if (c == '1') {
+            mode = mode == 0 ? 1 : 0;
+            continue;
+          }
+            
+          if (i % 2 == mode) {
+              ret.append(c);
+          }
       }
-    }
-    if (ret == "") ret = "EMPTY";
-    return ret;
+        return ret.length() == 0 ? "EMPTY" : ret.toString();
     }
 }
