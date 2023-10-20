@@ -1,13 +1,15 @@
+import java.util.Arrays;
+
 public class Main {
   public static void main(String[] args) {
-    String b="lloWorl";
-    StringBuilder sb=new StringBuilder();
-    sb.append("He11oWor1d");
-    sb.replace(2,b.length()+1,b);
-    // HelloWorlr1d
-    // HelloWorl1d
-    String answer = sb.toString();
-    System.out.println(answer);
+
+    // 조건에 맞게 수열 변환하기 2
+    int[] arr= {1, 2, 3, 100, 99, 98};
+    for (int i=0;i< arr.length;i++) {
+      if (arr[i] >= 50 && arr[i] % 2 == 0) arr[i] /= 2;
+      else if (arr[i] < 50 && arr[i] % 2 == 1) arr[i] = arr[i] * 2 + 1;
+    }
+    System.out.println(Arrays.toString(arr));
 
   }
 }
