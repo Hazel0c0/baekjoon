@@ -5,54 +5,62 @@ import java.util.Arrays;
 import java.util.List;
 
 public class 다트게임 {
-  public static void main(String[] args) {
-    int answer = 0;
-    String dartResult = "1S*2T*3S";
-    char[] d = dartResult.toCharArray();
-    List<Integer> list = new ArrayList<>();
-    int result = 0;
+    public static void main(String[] args) {
+        String dartResult = "0T#0T#0T*";
+        char[] d = dartResult.toCharArray();
+        List<Integer> list = new ArrayList<>();
+        int answer = 0;
+        System.out.println("배열 : " + Arrays.toString(d));
 
-    for (int i = 0; i < d.length; i++) {
-      System.out.println("d의 값 : "+ Arrays.toString(d));
-      switch (d[i]) {
-        case 'S':
-          result = bonus(d, i, 0);
-        case 'D':
-          result = bonus(d, i, 1);
-        case 'T':
-          result = bonus(d, i, 2);
-        case '*':
-          result = option(list, result, 2);
-        case '#':
-          result = option(list, result, -1);
-      }
-      list.add(result);
-      System.out.println("list에 저장된 값 : "+ result);
-    }
-    for (int l : list) {
-      System.out.println("l의 값 : "+l);
-      answer+=l;
-    }
-    System.out.println(answer);
-  }
+        for (int i = 0; i < d.length; i++) {
+            System.out.println("1 for문 : 현재 값, 순서 - " + d[i] + ", " + i);
 
-  private static int option(List<Integer> list, int result, int num) {
-    result *= num;
-    if (list.isEmpty()) {
-      int size = list.size();
-      for (int j = 0; j < size; j++) {
-        list.set(j, list.get(j) * 2);
-      }
+            switch (d[i]) {
+                case 'S':
+                    bonus(list, d,i, 0);
+                    break;
+                case 'D':
+                    bonus(list, d,i, 1);
+                    break;
+                case 'T':
+                    bonus(list, d,i, 2);
+                    break;
+                case '*':
+                    option(list,2);
+                    break;
+                case '#':
+                    option(list,-1);
+                    break;
+            }
+        }
+        for (int l : list) {
+            answer += l;
+        }
+        System.out.println("리스트 : " + list);
+        System.out.println("답 : " + answer);
     }
-    return result;
-  }
 
-  private static int bonus(char[] d, int i, int n) {
-    int num = (int) d[i - 1];
-    System.out.println("num : " +num);
-    for (int j = 0; j < n; j++) {
-      num *= num;
+    private static void option(List<Integer> list, int times) {
+        int current = list.size() - 1;
+        list.set(current, list.get(current) * times);
+        System.out.println("list.get - "+list.get(0));
+        if (current>0 && times==2) {
+            list.set(current-1, list.get(current-1) * times);
+        }
     }
-    return num;
-  }
+
+    private static void bonus(List<Integer> list, char[] d, int i, int n) {
+        int currentNum = d[i - 1] - '0';
+        // char type '1' -> int type 1 = 49가 나오기 때문에 -'0'을 해주면 된다.
+        if (i>1) {
+            if (currentNum == 0 && d[i - 2] - '0' == 1) currentNum = 10;
+        }
+        int num =currentNum;
+        for (int j = 0; j < n; j++) {
+            System.out.println("제곱");
+            num *= currentNum;
+        }
+        list.add(num);
+        System.out.println("리스트에 더해진 값 : " + list);
+    }
 }
