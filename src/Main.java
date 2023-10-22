@@ -1,60 +1,65 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
 
 public class Main {
-
   /*
-  주차 요금 계산
-  누적 주차 < 기본 시간(180분) (이하) - 기본 요금 청구(5000)
-          >           (초과) - 기본 요금 + 담위 시간 당 요금(10분/ 600원)
-   * 기본값 - 올림 / [a]: a보다 작지 않은 최소의 정수. 즉, 올림
-
-   차량 번호가 작은 차 순으로 정렬, 주차 요금 리턴
-
-   record : 시각 / 차량번호 / 내역
-      시각 기준 오름차순
-      출차 내역이 없다면 23:59분으로 간주
-
+  트럭이 다리를 건너는데 2초씩 소요된다.
+  모든 트럭이 건너가는데 걸리는 초는?
    */
-  public static int[] solution(int[] fees, String[] records) {
-    int[] answer = {};
-    return answer;
+  public static int solution(
+      int bridge_length, // 다리 길이
+      int weight, // 견딜 수 있는 무게
+      int[] truck_weights // 트럭 무게
+  ) {
+    Queue<Integer> road = new LinkedList<>();
+    Stack<Integer> truckStack = new Stack<>();
+    for(int t:truck_weights){
+      truckStack.add(t);
+    }
+
+    int minite = 0; // 초
+    int trucks_weights = 0;
+    int run = 0;
+
+    while (truckStack.empty()) {
+      minite++;
+      Integer currTruck = truckStack.peek();
+      System.out.println("minite = " + minite);
+      if (road.isEmpty() || trucks_weights + currTruck <= weight) {
+        trucks_weights = roadOnTruck(currTruck, trucks_weights, road, truckStack);
+      } else if (road.size() == bridge_length) {
+        road.remove();
+        trucks_weights -= road.remove();
+        if (road.peek() + currTruck < weight) {
+          trucks_weights = roadOnTruck(currTruck, trucks_weights, road, truckStack);
+        }
+      } else if (road.size() + run == bridge_length) {
+        road.remove();
+        trucks_weights -= road.remove();
+        if (road.peek() + currTruck < weight) {
+          trucks_weights = roadOnTruck(currTruck, trucks_weights, road, truckStack);
+        }
+      } else {
+        run++;
+      }
+    }
+
+    return minite + bridge_length - 1;
   }
 
-  public static int solution(int a, int b, int c) {
-    /*
-    1~6 주사위, 3번 굴리기
-    셋다 다르면 ++
-    두개만 같으면 (++)*(^2+^2+^2)
-    셋다 (++)*(^2+^2+^2)*(^3+^3+^3)
-     */
-    int answer = 0;
-    if (a==b && b==c) {
-      return (int) (27*Math.pow(a,6));
-    } else if (a!=b && b!= c && a!= c){
-      return a+b+c;
-    } else {
-      return (a+b+c)*(a*a+b*b+c*c);
-    }
+  private static int roadOnTruck(Integer currTruck, int trucks_weights, Queue<Integer> road, Stack<Integer> truckStack) {
+    System.out.println(currTruck + "트럭 입장");
+    trucks_weights += currTruck;
+    road.add(truckStack.pop());
+    System.out.println("trucks_weights = " + trucks_weights);
+    return trucks_weights;
   }
 
   public static void main(String[] args) {
-    solution({180, 5000, 10, 600},
-        new String[]
-            {"05:34 5961 IN", "06:00 0000 IN", "06:34 0000 OUT"
-                , "07:59 5961 OUT", "07:59 0148 IN", "18:59 0000 IN"
-                , "19:09 0148 OUT", "22:59 5961 IN", "23:00 5961 OUT"});
-
-    solution(2	,6	,1);
-    solution(5,3,3);
-    solution(4,4,4);
+    System.out.println(
+        solution(2, 10, new int[]{7, 4, 5, 6})
+    );
   }
 
-  private static int times(char[] d, int i, int n) {
-    int num = (int) d[i - 1];
-    for (int j=0;j<n;j++){
-      num*=num;
-    }
-    return num;
-  }
 }

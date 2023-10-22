@@ -20,7 +20,7 @@
 
 ### 문제 설명
 
-<p>두 정수 <code>a</code>, <code>d</code>와 길이가 n인 boolean 배열 <code>included</code>가 주어집니다. 첫째항이 <code>a</code>, 공차가 <code>d</code>인 등차수열에서 <code>included[i]</code>가 i + 1항을 의미할 때, 이 등차수열의 1항부터 n항까지 <code>included</code>가 true인 항들만 더한 값을 return 하는 solution 함수를 작성해 주세요.</p>
+<p>두 정수 <code>a</code>, <code>d</code>와 길이가 n인 boolean 배열과리스트 <code>included</code>가 주어집니다. 첫째항이 <code>a</code>, 공차가 <code>d</code>인 등차수열에서 <code>included[i]</code>가 i + 1항을 의미할 때, 이 등차수열의 1항부터 n항까지 <code>included</code>가 true인 항들만 더한 값을 return 하는 solution 함수를 작성해 주세요.</p>
 
 <hr>
 

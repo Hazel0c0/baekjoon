@@ -1,6 +1,5 @@
-package 배열;
+package 배열과리스트;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class 공넣기 {

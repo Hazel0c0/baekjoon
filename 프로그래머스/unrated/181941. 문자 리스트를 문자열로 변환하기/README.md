@@ -20,7 +20,7 @@
 
 ### 문제 설명
 
-<p>문자들이 담겨있는 배열 <code>arr</code>가 주어집니다. <code>arr</code>의 원소들을 순서대로 이어 붙인 문자열을 return 하는 solution함수를 작성해 주세요.</p>
+<p>문자들이 담겨있는 배열과리스트 <code>arr</code>가 주어집니다. <code>arr</code>의 원소들을 순서대로 이어 붙인 문자열을 return 하는 solution함수를 작성해 주세요.</p>
 
 <hr>
 
