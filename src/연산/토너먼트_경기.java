@@ -1,7 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
+package 연산;
 
-public class Main {
+public class 토너먼트_경기 {
   /*
   n명 참가, 토너먼트 형식
   1번부터 n번 까지 배정
