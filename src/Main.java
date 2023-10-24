@@ -1,6 +1,5 @@
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Stack;
 
 public class Main {
   /*
@@ -12,67 +11,57 @@ public class Main {
       int weight, // 견딜 수 있는 무게
       int[] truck_weights // 트럭 무게
   ) {
-//    Queue<Integer> road = new LinkedList<>(); // 도로
     Queue<Integer> truck = new LinkedList<>(); // 트럭
+    Queue<Integer> road = new LinkedList<>(); // 도로
 
-    for ( int t : truck_weights) {
+    for (int t : truck_weights) {
       truck.add(t);
     }
 
     int minite = 0; // 초
-    int trucks_weights = 0; // 도로 위 트럭들 무게
-    int run = 0; // 도로 위로 트럭은 올라오지 못하고 기존의 트럭들만 진행할 때
-    int n=0; // 트럭 순번
+    int trucks_weight = 0; // 도로 위 트럭들 무게
 
-    while (true) {
+    while (!truck.isEmpty()) {
       minite++;
       System.out.println("minite = " + minite);
+      int currTruck = truck.peek();
 
-      // [도로가 비었거나 || 도로 위 허용 가능 이하 무게 라면]
-      if (road.isEmpty() || trucks_weights + truck_weights[n] <= weight) {
-        trucks_weights = roadOnTruck(truck_weights[n], trucks_weights, road);
-
-//      } else if (road.size() == bridge_length) {
-//        road.remove();
-//        trucks_weights -= road.remove();
-//        if (road.peek() + currTruck < weight) {
-//          trucks_weights = roadOnTruck(currTruck, trucks_weights, road);
-//        }
-        // [도로 위 차 개수 + 도로의 남은 길이 == 도로의 길이] 같아 진다면
-      } else if (road.size() + run == bridge_length) {
-        // 맨 앞에 차 지우기
-        road.remove();
+      // 도로 끝에 도착한 트럭들
+      if (road.size() == bridge_length) {
         // 그 만큼 무게 제거
-        trucks_weights -= road.remove();
+        Integer remove = road.remove();
+        System.out.println("떠나간 트럭 = " + remove);
+        trucks_weight -= remove;
 
         // 이 때 도로 위에 트럭이 올라 올 수 있는 무게라면
-        if (trucks_weights + truck_weights[n] <= weight) {
-          trucks_weights = roadOnTruck(truck_weights[n], trucks_weights, road);
+        if (trucks_weight + currTruck <= weight) {
+          System.out.println(currTruck + "떠나간 뒤 트럭 입장");
+          road.add(currTruck);
+          trucks_weight += truck.remove(); // 도로 위 트럭 무게 저장
         }
+        // [도로가 비었거나 || 도로 위 허용 가능 이하 무게 라면]
+      } else if (road.isEmpty() || trucks_weight + currTruck <= weight) {
+        System.out.println(currTruck + "트럭 입장");
+        road.add(currTruck);
+        trucks_weight += truck.remove(); // 도로 위 트럭 무게 저장
       } else {
-        run++;
+        // 도로에 트럭이 올라가지 못할 경우 빈 자리
+        road.add(0);
       }
+      System.out.println("도로 위 트럭 무게 = " + road);
     }
-
-    /*
-    -  -  -  -  - 10
-    r   r  r  1  3   5  r  r  r  r     7
-     */
-
-    return minite + bridge_length - 1;
-  }
-
-  private static int roadOnTruck(Integer currTruck, int trucks_weights, Queue<Integer> road) {
-    System.out.println(currTruck + "kg 트럭 입장");
-    road.add(currTruck);
-    trucks_weights += currTruck; // 도로 위 트럭 무게 저장
-    System.out.println("도로 위 트럭 무게 = " + trucks_weights);
-    return trucks_weights;
+    return minite + bridge_length;
   }
 
   public static void main(String[] args) {
     System.out.println(
+        solution(100, 100, new int[]{10,10,10,10,10,10,10,10,10,10})
+    );
+    System.out.println(
         solution(2, 10, new int[]{7, 4, 5, 6})
+    );
+    System.out.println(
+        solution(100, 100, new int[]{10})
     );
   }
 }
