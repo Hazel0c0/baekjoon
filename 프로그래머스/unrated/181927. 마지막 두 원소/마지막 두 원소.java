@@ -9,12 +9,8 @@ class Solution {
             answer[i]=num_list[i];
         }
         
-        if (previousNum<lastNum){
-            answer[length]=(lastNum-previousNum);
-        } else {
-           answer[length]=(lastNum*2);
-        }
-        
+        answer[length]= previousNum<lastNum ? lastNum-previousNum:lastNum*2;
+
         return answer;
     }
 }
