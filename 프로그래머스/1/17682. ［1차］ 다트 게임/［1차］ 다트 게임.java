@@ -35,7 +35,7 @@ class Solution {
         System.out.println("리스트 : " + list);
         System.out.println("답 : " + answer);
     return answer;
-        
+
     }
 
     private static void option(List<Integer> list, int times) {
